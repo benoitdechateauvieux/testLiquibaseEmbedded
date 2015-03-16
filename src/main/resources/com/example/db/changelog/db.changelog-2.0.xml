@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <property name="autoIncrement" value="true" dbms="mysql"/>
+    <property name="autoIncrement" value="false" dbms="oracle"/>
+
+    <changeSet author="authorName" id="changelog-2.0">
+        <createTable tableName="USERS">
+            <column name="USERID" type="LONG" autoIncrement="${autoIncrement}">
+                <constraints nullable="true" primaryKey="false" unique="false"/>
+            </column>
+        </createTable>
+        <createIndex indexName="idx_address"
+                     tableName="USERS"
+                     unique="true">
+            <column name="USERID" type="LONG"/>
+        </createIndex>
+    </changeSet>
+
+    <changeSet author="authorName" id="changelog-2.1" dbms="oracle">
+        <createSequence catalogName="cat"
+                    cycle="true"
+                    incrementBy="2"
+                    maxValue="1000"
+                    minValue="10"
+                    ordered="true"
+                    schemaName="public"
+                    sequenceName="seq_id"
+                    startValue="5"/>
+    </changeSet>
+
+</databaseChangeLog>
